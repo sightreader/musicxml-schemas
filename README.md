@@ -47,18 +47,34 @@ These C# classes help you do that. They are auto-generated from the official Mus
 I briefly tested each C# class against one MusicXML file sourced from MuseScore.org (ClassicMan's transcription of Chopin's Scherzo No. 2 Op. 31):
 
 ```cs
+using System;
 using System.Xml.Serialization;
 using System.IO;
 
-XmlSerializer serializer = new XmlSerializer(typeof(MusicXmlSchema.ScorePartwise));
+namespace ExampleProgram
+{
+    static class Program
+    {
+        static void Main()
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(MusicXmlSchema.ScorePartwise));
 
-// Uncompress the MusicXML file if it ends with a .mxl before passing it in
-string filename = "uncompressed-musicxml-file.xml";
+            // Uncompress the MusicXML file if it ends with a .mxl before passing it in
+            string filename = "scherzo-no-2-opus-31.xml";
 
-var score = serializer.Deserialize(new FileStream(filename, FileMode.Open)) as MusicXmlSchema.ScorePartwise;
+            // Your fully typed score
+            var score = ser.Deserialize(new FileStream(filename, FileMode.Open)) as MusicXmlSchema.ScorePartwise;
 
-// Your fully typed score:
-// score.Part[i].Measure[i].Note[i].Chord...
+            Console.WriteLine(score.Credit[0].CreditWords.Value);
+            // Output: Scherzo No. 2 in B♭ Mino
+            Console.WriteLine(score.Part[0].Measure[0].Note[0].Pitch.Step);
+            // Output: B
+
+            Console.ReadKey();
+        }
+    }
+}
+
 ```
 
 ## Folder Structure
