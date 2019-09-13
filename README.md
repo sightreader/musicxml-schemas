@@ -57,16 +57,16 @@ namespace ExampleProgram
     {
         static void Main()
         {
-            XmlSerializer ser = new XmlSerializer(typeof(MusicXmlSchema.ScorePartwise));
+            XmlSerializer serializer = new XmlSerializer(typeof(MusicXmlSchema.ScorePartwise));
 
             // Uncompress the MusicXML file if it ends with a .mxl before passing it in
             string filename = "scherzo-no-2-opus-31.xml";
 
             // Your fully typed score
-            var score = ser.Deserialize(new FileStream(filename, FileMode.Open)) as MusicXmlSchema.ScorePartwise;
+            var score = serializer.Deserialize(new FileStream(filename, FileMode.Open)) as MusicXmlSchema.ScorePartwise;
 
             Console.WriteLine(score.Credit[0].CreditWords.Value);
-            // Output: Scherzo No. 2 in B♭ Mino
+            // Output: Scherzo No. 2 in B♭ Minor
             Console.WriteLine(score.Part[0].Measure[0].Note[0].Pitch.Step);
             // Output: B
 
