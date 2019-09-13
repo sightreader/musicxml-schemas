@@ -1,19 +1,10 @@
-## Folder Structure
+## What is this for?
 
-Each folder contains:
+If you are writing a C# program that consumes MusicXML files (a digital format for sheet music), it may be helpful to deserialize MusicXML files to a strongly typed class instead of manually parsing the XML document. 
 
-- The original MusicXML schema definition files as downloaded from [musicxml.com](
-https://www.musicxml.com/for-developers/musicxml-xsd/) for that version
-- The converted XSD -> C# class for XML deserialization
-
-## Generation
-
-1. [Run XmlSchemaClassGenerator](https://github.com/sightreader/XmlSchemaClassGenerator/commit/957617e0a6602f774f9c68e3796c50f2eb4da62e#diff-962ecf59898691a00089b77166a0114aR26) on each MusicXML version of the `musicxml.xsd` files. 
-2. Manually remove some extra generated classes `X_1`, `X_2` (there were 19 instances of these extra classes).
-
+These C# classes help you do that. They are auto-generated from the official MusicXML schema definition files using the [XmlSchemaClassGenerator](https://github.com/mganss/XmlSchemaClassGenerator) project.
 
 ## Excerpt Sample
-
 
 ```cs
  ...
@@ -65,6 +56,19 @@ var score = serializer.Deserialize(new FileStream(filename, FileMode.Open)) as M
 // Your fully typed score:
 // score.Part[i].Measure[i].Note[i].Chord...
 ```
+
+## Folder Structure
+
+Each folder contains:
+
+- The original MusicXML schema definition files as downloaded from [musicxml.com](
+https://www.musicxml.com/for-developers/musicxml-xsd/) for that version
+- The converted XSD -> C# class for XML deserialization
+
+## Generation
+
+1. [Run XmlSchemaClassGenerator](https://github.com/sightreader/XmlSchemaClassGenerator/commit/957617e0a6602f774f9c68e3796c50f2eb4da62e#diff-962ecf59898691a00089b77166a0114aR26) on each MusicXML version of the `musicxml.xsd` files. 
+2. Manually remove some extra generated classes `X_1`, `X_2` (there were 19 instances of these extra classes).
 
 ## Credits
 
