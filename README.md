@@ -39,13 +39,17 @@ These C# classes help you do that. They are auto-generated from the official Mus
  ...
  ...
  ...
+ 28,500 more lines...
 ```
 
 ## Usage Example
 
-I briefly tested each C# class against one MusicXML file sourced from MuseScore.org (ClassicMan's transcription of Scherzo No. 2 Op. 31):
+I briefly tested each C# class against one MusicXML file sourced from MuseScore.org (ClassicMan's transcription of Chopin's Scherzo No. 2 Op. 31):
 
 ```cs
+using System.Xml.Serialization;
+using System.IO;
+
 XmlSerializer serializer = new XmlSerializer(typeof(MusicXmlSchema.ScorePartwise));
 
 // Uncompress the MusicXML file if it ends with a .mxl before passing it in
